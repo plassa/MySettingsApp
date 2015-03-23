@@ -10,14 +10,14 @@ import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
-    public int age;
+    public RequestModel request;
     public static final int REQUEST_RESULT = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        age = -1;
+        request = new RequestModel();
     }
 
 
@@ -47,7 +47,7 @@ public class MainActivity extends ActionBarActivity {
             // Create your intent
             Intent i = new Intent(this, RequestActivity.class);
             // Bundle "extra"
-            i.putExtra("age", age);
+            i.putExtra("request", request);
             // Run the startActivity
             startActivityForResult(i, REQUEST_RESULT);
                 // Pass the current value
@@ -66,10 +66,10 @@ public class MainActivity extends ActionBarActivity {
             if (resultCode == RESULT_OK) {
                 // Toast YES or NO based on if age is greater than 21
                 // Get the age out of the form data
-                age = data.getIntExtra("age", -1);
+                request = (RequestModel) data.getSerializableExtra("request");
                 // Check the age
                 String message;
-                if (age >= 21) {
+                if (request.age >= 21) {
                     message = "DRINK UP!";
                 } else {
                     message = "NONE FOR YOU!";

@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 public class RequestActivity extends ActionBarActivity {
     EditText etAge;
+    RequestModel request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +21,10 @@ public class RequestActivity extends ActionBarActivity {
         // Find the edit text
         etAge = (EditText) findViewById(R.id.etAge);
         // Get the extra
-        int age = getIntent().getIntExtra("age", -1);
+        request = (RequestModel) getIntent().getSerializableExtra("request");
+
         // put the extra into the edit text
-        etAge.setText(String.valueOf(age));
+        etAge.setText(String.valueOf(request.age));
     }
 
 
@@ -52,11 +54,11 @@ public class RequestActivity extends ActionBarActivity {
     public void onRequest(View view) {
         // Set the form data
         // Get the edit text value
-        int age = Integer.parseInt(etAge.getText().toString());
+        request.age = Integer.parseInt(etAge.getText().toString());
         // Create an intent
         Intent i = new Intent();
         // Set the value in the intent
-        i.putExtra("age", age);
+        i.putExtra("request", request);
         // Set the result
         setResult(RESULT_OK, i);
         // Dismiss this screen
