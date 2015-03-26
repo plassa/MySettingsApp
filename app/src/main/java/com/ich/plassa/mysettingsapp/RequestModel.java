@@ -9,4 +9,5 @@ public class RequestModel implements Serializable {
     public int age = -1;
     public String name;  // not used yet
     public String birthday;  // not used yet
+    public String response;  // not used yet
 }
